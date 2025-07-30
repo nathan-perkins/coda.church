@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { createText, deleteText, getTexts, updateText } from '../controllers/text'
+import { createText, deleteText, getTexts, updateText } from '../controllers/text.js'
 
 const router = express.Router()
 
