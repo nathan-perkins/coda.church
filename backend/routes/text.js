@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
         const texts = await Text.find({})
         res.status(200).json({ success: true, data: texts })
     } catch (err) {
-        console.log('error in fetching texts:', err.message)
+        console.log('Error in fetching texts:', err.message)
         res.status(500).json({ success: false, message: 'Server error' })
     }
 })
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
         await newText.save()
         res.status(201).json({ success: true, data: newText })
     } catch (err) {
-        console.log('Error in creating product', err.message)
+        console.log('Error in creating text', err.message)
         res.status(500).json({ success: false, message: 'Server error' })
     }
 })
