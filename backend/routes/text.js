@@ -33,4 +33,20 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ success: false, message: 'Invalid text id' })
+    }
+
+    try {
+        await Text.findByIdAndDelete(id)
+        res.status(200).json({ success: true, message: 'Text deleted' })
+    } catch (err) {
+        console.log('Error in deleting text:', err.message)
+        res.status(500).json({ success: false, message: 'Server error' })
+    }
+})
+
 export default router
