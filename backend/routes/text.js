@@ -33,6 +33,23 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+    const { id } = req.params
+
+    const text = req.body
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ success: false, message: 'Invalid text id' })
+    }
+
+    try {
+        const updatedText = await Text.findByIdAndUpdate(id, text, { new: true })
+        res.status(200).json({ success: true, data: updatedText})
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Server error' })
+    }
+})
+
 router.delete('/:id', async (req, res) => {
     const { id } = req.params
 
