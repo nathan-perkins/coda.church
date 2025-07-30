@@ -5,6 +5,16 @@ import Text from '../models/text.js'
 
 const router = express.Router()
 
+router.get('/', async (req, res) => {
+    try {
+        const texts = await Text.find({})
+        res.status(200).json({ success: true, data: texts })
+    } catch (err) {
+        console.log('error in fetching texts:', err.message)
+        res.status(500).json({ success: false, message: 'Server error' })
+    }
+})
+
 router.post('/', async (req, res) => {
     const text = req.body // user supplied data
 
